@@ -1,0 +1,24 @@
+.CardProducts {
+  @apply flex flex-col justify-center items-start w-52 mr-8 last:mr-0;
+}
+
+.CardProductsImage {
+  @apply w-full h-auto border border-gray-200 rounded-xl;
+}
+
+.CardProductsText {
+  @apply my-2;
+}
+
+.CardProductsPrice {
+  @apply mb-2 text-red-500 font-bold text-lg w-full text-center;
+}
+
+.CardProductsPriceOld {
+  @apply text-gray-400 text-base mr-3 relative;
+  @apply before:absolute before:left-0 before:top-1/2 before:right-0 before:border-t before:border-gray-400 before:-rotate-6;
+}
+
+.CardProductsButton {
+  @apply w-full text-black hover:bg-red-600 hover:text-white;
+}

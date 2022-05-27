@@ -10,12 +10,16 @@
   @apply text-xl font-bold border-b-2 border-black  mb-8 w-full;
 }
 
+.BrandContainerWrapper {
+  @apply flex max-w-full overflow-x-auto;
+}
+
 .BrandContainer {
-  @apply flex w-full;
+  @apply flex;
   @apply justify-between;
   @apply mb-4;
 }
 
 .BrandItem {
-  @apply p-3 border-2 border-black rounded-xl;
+  @apply p-3 border-2 border-black rounded-xl mr-5 last:mr-0 w-[180px];
 }

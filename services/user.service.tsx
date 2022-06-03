@@ -3,7 +3,6 @@ import getConfig from "next/config";
 
 const { publicRuntimeConfig } = getConfig();
 
-const baseUrl = `${publicRuntimeConfig.apiUrl}/users`;
 /*
 const userSubject = new BehaviorSubject(
   process.browser && JSON.parse(localStorage.getItem("user"))
@@ -28,7 +27,7 @@ const CODE_FETCHING = {
   },
   error: {
     unknownUrl: 404,
-    denieded: 429,
+    denied: 429,
     Unauthorized: 401,
     UnprocessableEntity: 422,
   },
@@ -37,6 +36,10 @@ const CODE_FETCHING = {
 function returnFunction(callback: any) {
   return callback
     .then((response: any) => {
+      console.log(
+        "🚀 ~ file: user.service.tsx ~ line 39 ~ .then ~ response",
+        response
+      );
       if (response.status === CODE_FETCHING.error.Unauthorized) {
         return false;
       }
@@ -80,10 +83,14 @@ const api = (
 };
 
 async function login(email: string, password: string) {
-  const response = await api(`users/login`, TYPE_FETCHING.post, {
+  const response = await api(`/users/login`, TYPE_FETCHING.post, {
     email,
     clave: password,
   });
+  console.log(
+    "🚀 ~ file: user.service.tsx ~ line 88 ~ login ~ response.data",
+    response.data
+  );
   localStorage.setItem("user", JSON.stringify(response.data));
   return response.data;
 }

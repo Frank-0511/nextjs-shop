@@ -10,6 +10,9 @@ const nextConfig = {
       "e7.pngegg.com",
     ],
   },
+  publicRuntimeConfig: {
+    apiUrl: process.env.NEXT_PUBLIC_URL_API_BACKEND, // production api
+  },
 };
 
 module.exports = nextConfig;

@@ -1,12 +1,29 @@
-import LoginRoundedIcon from "@mui/icons-material/LoginRounded";
-import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
+import { LOCAL_USER_ID, LOCAL_USER_ROLE } from "@/utils/storage";
+
 import Button from "@mui/material/Button";
-import { useRouter } from "next/router";
 import DrawerCategories from "@/components/DrawerCategories";
+import LoginRoundedIcon from "@mui/icons-material/LoginRounded";
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+import { ROLES } from "@/utils/constants";
+import SettingsIcon from "@mui/icons-material/Settings";
+import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
+import { useRouter } from "next/router";
 
 const Header = () => {
   const router = useRouter();
   const redirectLogin = () => {
+    setTimeout(() => {
+      router.push("/login");
+    }, 500);
+  };
+
+  const redirectAdmin = () => {
+    setTimeout(() => {
+      router.push("/admin");
+    }, 500);
+  };
+
+  const handleLogout = () => {
     setTimeout(() => {
       router.push("/login");
     }, 500);
@@ -17,18 +34,36 @@ const Header = () => {
       <DrawerCategories />
       <h1 className="font-bold text-2xl font-press">Tecno Store</h1>
       <div className="flex">
-        <Button
-          className="mr-8 text-white"
-          variant="text"
-          onClick={() => redirectLogin()}
-        >
-          <LoginRoundedIcon className="mr-2" />
-          Iniciar sesión
+        {!LOCAL_USER_ID() && (
+          <Button
+            className="mr-4 text-white"
+            variant="text"
+            onClick={() => redirectLogin()}
+          >
+            <LoginRoundedIcon />
+          </Button>
+        )}
+        {LOCAL_USER_ID() && (
+          <Button
+            className="mr-4 text-white"
+            variant="text"
+            onClick={() => handleLogout()}
+          >
+            <LogoutRoundedIcon />
+          </Button>
+        )}
+        <Button className="mr-4 text-white" variant="text">
+          <ShoppingCartRoundedIcon />
         </Button>
-        <Button className="text-white" variant="text">
-          <ShoppingCartRoundedIcon className="mr-2" />
-          Mi carrito
-        </Button>
+        {LOCAL_USER_ROLE() === ROLES.admin && (
+          <Button
+            className="mr-4 text-white"
+            variant="text"
+            onClick={() => redirectAdmin()}
+          >
+            <SettingsIcon />
+          </Button>
+        )}
       </div>
     </header>
   );

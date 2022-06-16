@@ -1,12 +1,13 @@
-import Brands from "@/containers/Brands";
+import AdminContainer from "@/containers/Admin/AdminContainer";
 import BestSellers from "@/containers/BestSellers";
+import Brands from "@/containers/Brands";
 import Footer from "@/containers/Footer";
 import Header from "@/containers/Header";
+import type { NextPage } from "next";
 import Novelty from "@/containers/Novelty";
 import Promotion from "@/containers/Promotion";
-import type { NextPage } from "next";
 
-const Home: NextPage = () => {
+const HomePage: NextPage = () => {
   return (
     <>
       <Header />
@@ -21,4 +22,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default HomePage;

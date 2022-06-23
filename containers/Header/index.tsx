@@ -1,7 +1,9 @@
 import { LOCAL_USER_ID, LOCAL_USER_ROLE } from "@/utils/storage";
+import { useEffect, useState } from "react";
 
 import Button from "@mui/material/Button";
 import DrawerCategories from "@/components/DrawerCategories";
+import Link from "next/link";
 import LoginRoundedIcon from "@mui/icons-material/LoginRounded";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { ROLES } from "@/utils/constants";
@@ -10,7 +12,15 @@ import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 import { useRouter } from "next/router";
 
 const Header = () => {
+  const [userId, setUserId] = useState<string | null | undefined>(null);
+  const [userRole, setUserRole] = useState<string | null | undefined>(null);
   const router = useRouter();
+
+  useEffect(function () {
+    setUserId(LOCAL_USER_ID());
+    setUserRole(LOCAL_USER_ROLE());
+  }, []);
+
   const redirectLogin = () => {
     setTimeout(() => {
       router.push("/login");
@@ -32,9 +42,11 @@ const Header = () => {
   return (
     <header className="w-full flex h-20 bg-black text-white items-center justify-between px-10">
       <DrawerCategories />
-      <h1 className="font-bold text-2xl font-press">Tecno Store</h1>
+      <Link href="/">
+        <button className="font-bold text-2xl font-press">Tecno Store</button>
+      </Link>
       <div className="flex">
-        {!LOCAL_USER_ID() && (
+        {!userId && (
           <Button
             className="mr-4 text-white"
             variant="text"
@@ -43,7 +55,7 @@ const Header = () => {
             <LoginRoundedIcon />
           </Button>
         )}
-        {LOCAL_USER_ID() && (
+        {userId && (
           <Button
             className="mr-4 text-white"
             variant="text"
@@ -55,7 +67,7 @@ const Header = () => {
         <Button className="mr-4 text-white" variant="text">
           <ShoppingCartRoundedIcon />
         </Button>
-        {LOCAL_USER_ROLE() === ROLES.admin && (
+        {userRole === ROLES.admin && (
           <Button
             className="mr-4 text-white"
             variant="text"

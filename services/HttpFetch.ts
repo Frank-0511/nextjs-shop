@@ -13,6 +13,10 @@ const HttpFetch = {
       },
       method: "GET",
     });
+    console.log(
+      "🚀 ~ file: HttpFetch.ts ~ line 16 ~ get: ~ response",
+      response
+    );
     return response.json();
   },
   post: async (url: string, body: any, headers: any = {}) => {

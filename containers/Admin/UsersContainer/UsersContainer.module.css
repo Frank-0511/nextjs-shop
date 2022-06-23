@@ -1,0 +1,4 @@
+.UsersContainer {
+  width: calc(100% - 200px);
+  @apply bg-slate-100 flex flex-col;
+}

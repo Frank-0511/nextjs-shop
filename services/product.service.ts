@@ -1,16 +1,16 @@
 import HttpFetch from "./HttpFetch";
 
 export const productService = {
-  getCategories,
+  getProducts,
 };
 
-interface IGetProductParams {
-  idProduct: number | null;
-}
-
-async function getCategories({ idProduct = null }: IGetProductParams) {
+async function getProducts(idProduct: number | null = null) {
   const response = await HttpFetch.get(
-    `/categories${idProduct ? `/${idProduct}` : ""}`
+    `/products${idProduct ? `/${idProduct}` : ""}`
+  );
+  console.log(
+    "🚀 ~ file: product.service.ts ~ line 11 ~ getProducts ~ response",
+    response
   );
   return response;
 }

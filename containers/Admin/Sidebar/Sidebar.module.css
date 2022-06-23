@@ -1,0 +1,19 @@
+.SidebarContainer {
+  @apply h-full bg-gray-600 w-[200px];
+}
+
+.SidebarContent {
+  @apply py-8;
+}
+
+.ItemMenu {
+  @apply w-max py-2 flex justify-start ml-6 mb-4 last:mb-0;
+}
+
+.ItemMenu.ActiveItem > button {
+  @apply text-yellow-500;
+}
+
+.ItemMenu > button {
+  @apply text-white;
+}

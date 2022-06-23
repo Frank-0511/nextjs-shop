@@ -4,11 +4,7 @@ export const categoryService = {
   getCategories,
 };
 
-interface IGetCategoryParams {
-  idCategory: number | null;
-}
-
-async function getCategories({ idCategory = null }: IGetCategoryParams) {
+async function getCategories(idCategory: number | null = null) {
   const response = await HttpFetch.get(
     `/categories${idCategory ? `/${idCategory}` : ""}`
   );

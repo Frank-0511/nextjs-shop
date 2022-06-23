@@ -13,6 +13,7 @@ import { ROLES } from "@/utils/constants";
 
 export const userService = {
   login,
+  getUsers,
 };
 
 async function login(email: string, password: string) {
@@ -28,5 +29,10 @@ async function login(email: string, password: string) {
     setItem(KEY_USER_LAST_NAME, response.data.last_name);
     setItem(KEY_USER_ROLE, ROLES.admin);
   }
+  return response;
+}
+
+async function getUsers(idUser: number | null = null) {
+  const response = await HttpFetch.get(`/users${idUser ? `/${idUser}` : ""}`);
   return response;
 }

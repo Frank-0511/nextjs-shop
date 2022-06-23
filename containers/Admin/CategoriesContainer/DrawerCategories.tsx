@@ -17,6 +17,7 @@ interface IDrawerCategories {
 
 const registerSchema = object({
   name: string().nonempty("Campo obligatorio"),
+  description: string().nonempty("Campo obligatorio"),
 });
 type RegisterInput = TypeOf<typeof registerSchema>;
 
@@ -72,16 +73,30 @@ const DrawerCategories = ({
         <div className="text-xl font-bold mb-16">
           {action === "crear" ? "Crear Categoría" : "Editar Categoría"}
         </div>
-        <div className="mb-8">
+        <div className="mb-4">
           <TextField
             label="Nombre"
-            type="name"
+            type="text"
             fullWidth
             placeholder="Nombre"
             required
             error={!!errors["name"]}
             helperText={errors["name"] ? errors["name"].message : ""}
             {...register("name")}
+          />
+        </div>
+        <div className="mb-8">
+          <TextField
+            label="Descripción"
+            type="text"
+            fullWidth
+            placeholder="Descripción"
+            required
+            error={!!errors["description"]}
+            helperText={
+              errors["description"] ? errors["description"].message : ""
+            }
+            {...register("description")}
           />
         </div>
         <div className="flex justify-between">

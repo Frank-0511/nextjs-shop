@@ -1,19 +1,41 @@
+import { Fragment, useEffect, useState } from "react";
+
 import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
-import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
-import { Fragment, useState } from "react";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import { categoryService } from "@/services/category.service";
+import { nanoid } from "nanoid";
+import { useDebouncedCallback } from "use-debounce";
+import { useRouter } from "next/router";
 
 const DrawerCategories = () => {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [categories, setCategories] = useState<any[]>([]);
+
+  const fetchDataCategories = useDebouncedCallback(() => {
+    categoryService.getCategories().then((response) => {
+      setCategories(response.data);
+    });
+  });
+
+  useEffect(() => {
+    fetchDataCategories();
+  }, [fetchDataCategories]);
+
+  const handleCategoryClick = (category: any) => {
+    router.push(`/categories/${category.product_category_id}`);
+  };
 
   return (
     <Fragment>
@@ -33,26 +55,10 @@ const DrawerCategories = () => {
           onKeyDown={() => setOpen(false)}
         >
           <List>
-            {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {["All mail", "Trash", "Spam"].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
+            {categories.map((row) => (
+              <ListItem key={nanoid()} disablePadding>
+                <ListItemButton onClick={() => handleCategoryClick(row)}>
+                  <ListItemText primary={row.name} />
                 </ListItemButton>
               </ListItem>
             ))}

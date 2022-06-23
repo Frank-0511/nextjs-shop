@@ -13,6 +13,7 @@ specifiers:
   autoprefixer: ^10.4.7
   eslint: 8.15.0
   eslint-config-next: 12.1.6
+  nanoid: ^4.0.0
   next: 12.1.6
   postcss: ^8.4.14
   react: 18.1.0
@@ -29,6 +30,7 @@ dependencies:
   '@hookform/resolvers': 2.9.1_react-hook-form@7.32.2
   '@mui/icons-material': 5.8.4_cre6ssufjgywstxdtrkghcdzbi
   '@mui/material': 5.8.4_ril4fa3w2ttsbuh6narxj3wiri
+  nanoid: 4.0.0
   next: 12.1.6_5ovelu635kdjiiodz74uabvzfu
   react: 18.1.0
   react-dom: 18.1.0_react@18.1.0
@@ -2113,6 +2115,12 @@ packages:
     resolution: {integrity: sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
+
+  /nanoid/4.0.0:
+    resolution: {integrity: sha512-IgBP8piMxe/gf73RTQx7hmnhwz0aaEXYakvqZyE302IXW3HyVNhdNGC+O2MwMAVhLEnvXlvKtGbtJf6wvHihCg==}
+    engines: {node: ^14 || ^16 || >=18}
+    hasBin: true
+    dev: false
 
   /natural-compare/1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}

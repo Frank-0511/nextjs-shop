@@ -1,10 +1,11 @@
 import { Box, Button, CircularProgress, TextField } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { object, string, TypeOf } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { TypeOf, object, string } from "zod";
 import { useEffect, useState } from "react";
+
 import { useRouter } from "next/router";
 import { userService } from "@/services/user.service";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const registerSchema = object({
   email: string().nonempty("Campo obligatorio").email("Correo invalido"),
@@ -45,27 +46,14 @@ const FormLogin = () => {
         router.push("/");
       })
       .catch((error) => {
-        if (error.response.data) {
-          console.log(
-            "🚀 ~ file: index.tsx ~ line 49 ~ FormLogin ~ error.response.data",
-            error.response.data
-          );
-          console.log(
-            "🚀 ~ file: index.tsx ~ line 52 ~ FormLogin ~ error.status",
-            error.status
-          );
-        } else if (error.request) {
-          console.log(
-            "🚀 ~ file: index.tsx ~ line 54 ~ FormLogin ~ error.message",
-            error.message
-          );
-        } else {
-          console.log(
-            "🚀 ~ file: index.tsx ~ line 64 ~ FormLogin ~ error",
-            error
-          );
-        }
         setLoading(false);
+        if (error.response.data) {
+          throw Error(error);
+        } else if (error.request) {
+          throw Error(error.message);
+        } else {
+          throw Error(error);
+        }
       });
   };
 

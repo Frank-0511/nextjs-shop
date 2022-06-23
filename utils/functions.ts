@@ -105,3 +105,37 @@ export const truncateText = (text: string, lengthCharacters = 25) => {
     ? text.substr(0, lengthCharacters).concat("...")
     : text;
 };
+
+function buildFormData(
+  formData: FormData,
+  data: any,
+  parentKey: string | null = null
+) {
+  if (
+    data &&
+    typeof data === "object" &&
+    !(data instanceof Date) &&
+    !(data instanceof File)
+  ) {
+    Object.keys(data).forEach((key) => {
+      buildFormData(
+        formData,
+        data[key],
+        parentKey ? `${parentKey}[${key}]` : key
+      );
+    });
+  } else {
+    const value = data == null ? "" : data;
+    if (parentKey) {
+      formData.append(parentKey, value);
+    }
+  }
+}
+
+export function jsonToFormData(data: any) {
+  const formData = new FormData();
+
+  buildFormData(formData, data);
+
+  return formData;
+}

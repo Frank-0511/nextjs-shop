@@ -1,8 +1,9 @@
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Button, CircularProgress, Input, TextField } from "@mui/material";
-import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { object, string, TypeOf } from "zod";
+import { TypeOf, object, string } from "zod";
+import { useEffect, useState } from "react";
+
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const registerSchema = object({
   name: string()
@@ -47,7 +48,6 @@ const FormRegister = () => {
   }, [isSubmitSuccessful]);
 
   const onSubmitHandler: SubmitHandler<RegisterInput> = (values) => {
-    console.log(values);
     setLoading(true);
   };
 
